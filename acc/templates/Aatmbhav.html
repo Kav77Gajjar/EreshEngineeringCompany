@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, ini<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aatmbhav</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -19,9 +23,25 @@
             color: white !important;
             transform: scale(1.05);
         }
-        
+
         header {
             transition: transform 0.3s ease-in-out;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            background-color: transparent;
+        }
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white !important;
+            transform: scale(1.05);
         }
         header.hide {
             transform: translateY(-100%);
@@ -30,7 +50,7 @@
 </head>
 <body class="font-sans bg-[#F3F9FB]">
     <!-- Header Section -->
-    <header class="sticky top-0 z-50 bg-[#226597] shadow-md">
+    <header class="fixed top-0 w-full z-50 bg-transparent">
         <div class="container mx-auto px-4 py-3">
             <nav class="flex items-center justify-between">
                 <!-- Logo and Brand Name -->
@@ -42,7 +62,7 @@
                         Aatmbhav
                     </a>
                 </div>
-                
+
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-2 ml-16">
                     <a href="#home" class="nav-link text-[#F3F9FB] hover:text-[#87C0CD] font-medium transition-colors">Home</a>
@@ -51,14 +71,14 @@
                     <a href="#blog" class="nav-link text-[#F3F9FB] hover:text-[#87C0CD] font-medium transition-colors">Blog</a>
                     <a href="#contact" class="nav-link text-[#F3F9FB] hover:text-[#87C0CD] font-medium transition-colors">Contact</a>
                 </div>
-                
+
                 <!-- Mobile Menu Button -->
                 <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
                     <i id="menu-icon" class="fas fa-bars text-2xl"></i>
                 </button>
             </nav>
         </div>
-        
+
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden absolute top-16 right-0 w-full bg-white shadow-lg py-4">
             <div class="flex flex-col space-y-2 px-4">
@@ -72,15 +92,22 @@
     </header>
 
     <!-- Main Content -->
-    <main class="container mx-auto px-4 py-8">
-        <!-- Welcome Section - First visible element -->
-        <section class="relative min-h-screen flex items-center justify-center">
-            <div class="text-center">
-                <h1 class="text-4xl md:text-5xl font-bold text-gray-800">Aatmbhav</h1>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto mt-2">Welcome to our world of innovation and excellence</p>
+    <main>
+        <!-- Welcome Section with Parallax Effect -->
+
+        <section class="relative w-full min-h-screen flex flex-col bg-cover bg-center m-0 p-0 overflow-hidden"
+                 style="background-image: url('https://media.yogauonline.com/app/uploads/2021/04/06051358/0_header_image-1.webp'); background-size: cover; margin: 0; padding: 0; background-attachment: fixed;">
+            <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+            <!-- Navigation Spacer -->
+            <div class="h-20"></div>
+            <div class="flex-grow flex items-center justify-center relative z-10">
+                <div class="text-center transform transition-transform duration-500 ease-out" id="welcome-content">
+                    <h1 class="text-4xl md:text-5xl font-bold text-white">Aatmbhav</h1>
+                    <p class="text-lg text-white max-w-2xl mx-auto mt-2">Welcome to our world of innovation and excellence</p>
+                </div>
             </div>
         </section>
-        
+
         <!-- About Me Section -->
         <section id="about" class="pt-20 pb-12">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center">About Me</h2>
@@ -89,17 +116,16 @@
                     <!-- Doctor's Photo -->
                     <div class="w-full md:w-1/2 flex justify-center">
                         <div class="bg-blue-100 rounded-full overflow-hidden shadow-lg w-64 h-64">
-                            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" 
-                                 alt="Doctor" 
+                            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+                                 alt="Doctor"
                                  class="w-full h-full object-cover">
                         </div>
                     </div>
-                    
+
                     <!-- Doctor's Information -->
                     <div class="w-full md:w-2/3">
-                        <h3 class="text-2xl font-semibold text-gray-700 mb-4">Dr. Aatmbhav Sharma</h3>
-                        <p class="text-gray-600 mb-6">With over 15 years of experience in holistic medicine, Dr. Sharma specializes in integrating traditional and modern approaches to wellness. His unique methodology combines yoga therapy, nutritional counseling, and personalized treatment plans.</p>
-                        
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-4">{{ about_me.title|default:"Dr. Aatmbhav Sharma"}}</h3>
+                        <p class="text-gray-600 mb-6">{{ about_me.content|default:"With over 15 years of experience in holistic medicine, Dr. Sharma specializes in integrating traditional and modern approaches to wellness. His unique methodology combines yoga therapy, nutritional counseling, and personalized treatment plans." }}</p>
                     </div>
                 </div>
             </div>
@@ -110,8 +136,10 @@
             <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center">Our Services</h2>
             <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">
                 <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow flex flex-col h-full">
-                    <div class="w-full h-40 bg-blue-100 rounded-lg mb-4 flex items-center justify-center">
-                        <i class="fas fa-spa text-blue-500 text-4xl"></i>
+                    <div class="w-full h-40 bg-blue-100 rounded-lg mb-4 overflow-hidden">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI7SuXzOA-2ncYcUT_Ih5ipVoNXUbWrMb5-Q&s"
+                             alt="Yoga"
+                             class="w-full h-full object-cover">
                     </div>
                     <h3 class="text-xl font-semibold text-gray-800 mb-2">Yoga</h3>
                     <p class="text-gray-600 mb-4 flex-grow">Personalized yoga sessions for physical and mental wellbeing.</p>
@@ -120,8 +148,10 @@
                     </button>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow flex flex-col h-full">
-                    <div class="w-full h-40 bg-blue-100 rounded-lg mb-4 flex items-center justify-center">
-                        <i class="fas fa-utensils text-blue-500 text-4xl"></i>
+                    <div class="w-full h-40 bg-blue-100 rounded-lg mb-4 overflow-hidden">
+                        <img src="https://womensfitness.co.uk/wp-content/uploads/sites/3/2022/08/the-eatwell-plate-balanced-diet-nutrition.jpg"
+                             alt="Diet Plate"
+                             class="w-full h-full object-cover">
                     </div>
                     <h3 class="text-xl font-semibold text-gray-800 mb-2">Diet Plans</h3>
                     <p class="text-gray-600 mb-4 flex-grow">Customized nutrition plans tailored to your health goals.</p>
@@ -130,8 +160,10 @@
                     </button>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow flex flex-col h-full">
-                    <div class="w-full h-40 bg-blue-100 rounded-lg mb-4 flex items-center justify-center">
-                        <i class="fas fa-user-md text-blue-500 text-4xl"></i>
+                    <div class="w-full h-40 bg-blue-100 rounded-lg mb-4 overflow-hidden">
+                        <img src="https://img.freepik.com/free-photo/medical-stethoscope-white-surface_53876-95029.jpg"
+                             alt="Medical Consultation"
+                             class="w-full h-full object-cover object-[center_bottom]">
                     </div>
                     <h3 class="text-xl font-semibold text-gray-800 mb-2">Consult</h3>
                     <p class="text-gray-600 mb-4 flex-grow">One-on-one consultations for holistic health guidance.</p>
@@ -148,15 +180,22 @@
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center">Latest Articles</h2>
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Article 1 -->
+                {% for post in posts %}
+                <!-- Dynamic Article -->
                 <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden flex flex-col">
+                    {% if post.image_url %}
+                    <div class="h-48 bg-blue-100 overflow-hidden">
+                        <img src="{{ post.image_url }}" alt="{{ post.title }}" class="w-full h-full object-cover">
+                    </div>
+                    {% else %}
                     <div class="h-48 bg-blue-100 flex items-center justify-center">
                         <i class="fas fa-newspaper text-blue-500 text-5xl"></i>
                     </div>
+                    {% endif %}
                     <div class="p-6 flex-grow">
-                        <div class="text-sm text-gray-500 mb-2">Posted on May 15, 2023</div>
-                        <h3 class="text-xl font-semibold text-gray-800 mb-2">The Power of Meditation</h3>
-                        <p class="text-gray-600 mb-4">Discover how daily meditation can transform your mental health and productivity...</p>
+                        <div class="text-sm text-gray-500 mb-2">Posted on {{ post.created_at|date:"F d, Y" }}</div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ post.title }}</h3>
+                        <p class="text-gray-600 mb-4">{{ post.content|truncatewords:15 }}...</p>
                     </div>
                     <div class="px-6 pb-6">
                         <button class="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
@@ -164,40 +203,11 @@
                         </button>
                     </div>
                 </div>
-
-                <!-- Article 2 -->
-                <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden flex flex-col">
-                    <div class="h-48 bg-blue-100 flex items-center justify-center">
-                        <i class="fas fa-newspaper text-blue-500 text-5xl"></i>
-                    </div>
-                    <div class="p-6 flex-grow">
-                        <div class="text-sm text-gray-500 mb-2">Posted on June 2, 2023</div>
-                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Nutrition Myths Debunked</h3>
-                        <p class="text-gray-600 mb-4">Learn the truth behind common nutrition myths that might be affecting your diet...</p>
-                    </div>
-                    <div class="px-6 pb-6">
-                        <button class="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
-                            Read More
-                        </button>
-                    </div>
+                {% empty %}
+                <div class="col-span-full text-center py-8">
+                    <p class="text-gray-600 text-lg">No blog posts available yet. Add some posts through the admin panel!</p>
                 </div>
-
-                <!-- Article 3 -->
-                <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden flex flex-col">
-                    <div class="h-48 bg-blue-100 flex items-center justify-center">
-                        <i class="fas fa-newspaper text-blue-500 text-5xl"></i>
-                    </div>
-                    <div class="p-6 flex-grow">
-                        <div class="text-sm text-gray-500 mb-2">Posted on June 20, 2023</div>
-                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Morning Routines for Success</h3>
-                        <p class="text-gray-600 mb-4">How starting your day right can set you up for success in all areas of life...</p>
-                    </div>
-                    <div class="px-6 pb-6">
-                        <button class="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
-                            Read More
-                        </button>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>
@@ -206,7 +216,7 @@
     <section id="contact" class="py-12 bg-gray-50 rounded-xl">
         <div class="max-w-3xl mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center">Contact Us</h2>
-            <form action="" method="POST" class="space-y-6">
+            <form action="{% url 'mail' %}" method="POST" class="space-y-6">
                 {%csrf_token%}
                 <div>
                     <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
@@ -243,7 +253,7 @@
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 min-h-[60px] max-h-[300px] overflow-y-auto"></textarea>
                 </div>
                 
-                <button type="submit" 
+                <button type="submit"
                     class="w-full py-3 px-4 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition-colors">
                     Send Message
                 </button>
