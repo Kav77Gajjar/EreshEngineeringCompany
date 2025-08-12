@@ -29,3 +29,16 @@ class Blog(models.Model):
 
 
 
+class SocialLinks(models.Model):
+    title = models.CharField('AddSocialLinksBelow', max_length=50, blank=True, null=True)
+    facebook = models.URLField(blank=True, null=True)
+    twitter = models.URLField(blank=True, null=True)
+    instagram = models.URLField(blank=True, null=True)
+    linkedin = models.URLField(blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Social Media Links"
+        verbose_name_plural = "Social Media Links"
+
+    def __str__(self):
+        return self.title

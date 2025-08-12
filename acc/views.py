@@ -2,26 +2,28 @@ from django.shortcuts import render, get_object_or_404
 from django.core.mail import send_mail
 from django.http import HttpResponse
 
-from .models import Blog, AboutMe
+from .models import Blog, AboutMe, SocialLinks
 
 
-# admin service - for homepage with all sections
+# common context for all views
+def common_context():
+    return {
+        'about_me' : AboutMe.objects.first(),
+        'posts' : Blog.objects.all().order_by("-created_at"),
+        'links' : SocialLinks.objects.first()
+    }
+# admin service
 def about_me_view(request):
-    about_me = AboutMe.objects.first()
-    posts = Blog.objects.all().order_by("-created_at")
-    return render(request, "Aatmbhav.html", {
-        'about_me': about_me,
-        'posts': posts
-    })
+    return render(request, "Aatmbhav.html", common_context())
 
-# homepage view - shows all sections
 def blog_short(request):
-    posts = Blog.objects.all().order_by("-created_at")
-    about_me = AboutMe.objects.first()
-    return render(request, "Aatmbhav.html", {
-        'posts': posts,
-        'about_me': about_me
-    })
+    context = common_context()
+    context['posts'] = context['posts'][:3]
+    return render(request, "Aatmbhav.html", context)
+
+def social_view(request):
+    return render(request, "Aatmbhav.html", common_context())
+
 
 # smtp service
 def mail(request):

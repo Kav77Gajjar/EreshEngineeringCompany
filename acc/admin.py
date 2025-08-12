@@ -6,6 +6,7 @@ admin.site.site_title = "Aatmabhav's Admin Portal"
 admin.site.index_title = "Welcome to Aatmabhav's Admin Dashboard"
 
 admin.site.register(AboutMe)
+admin.site.register(SocialLinks)
 
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
@@ -19,5 +20,6 @@ class BlogAdmin(admin.ModelAdmin):
         css = {
             'all': ('admin/css/widgets.css',)
         }
+
 
 
