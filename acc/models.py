@@ -28,6 +28,19 @@ class Blog(models.Model):
         return self.title
 
 
+class Services(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    service_image_url = models.URLField()
+
+    class Meta:
+        verbose_name = "Service"
+        verbose_name_plural = "Services"
+
+    def __str__(self):
+        return self.title
+
+
 
 class SocialLinks(models.Model):
     title = models.CharField('AddSocialLinksBelow', max_length=50, blank=True, null=True)

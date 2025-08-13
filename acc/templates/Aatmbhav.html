@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aatmbhav</title>
+    <title>Aatmbhava</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -131,47 +131,65 @@
             </div>
         </section>
 
-        <!-- Services Section -->
         <section id="services" class="py-12 bg-[#87C0CD] rounded-xl">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center">Our Services</h2>
+
             <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">
+                {% for ser in service %}
                 <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow flex flex-col h-full">
                     <div class="w-full h-40 bg-blue-100 rounded-lg mb-4 overflow-hidden">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI7SuXzOA-2ncYcUT_Ih5ipVoNXUbWrMb5-Q&s"
+                        <img src="{{ ser.service_image_url }}"
                              alt="Yoga"
                              class="w-full h-full object-cover">
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Yoga</h3>
-                    <p class="text-gray-600 mb-4 flex-grow">Personalized yoga sessions for physical and mental wellbeing.</p>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ ser.title }}</h3>
+                    <p class="text-gray-600 mb-4 flex-grow">{{ ser.description }}</p>
                     <button class="w-full py-2 bg-[#537791] text-[#F7F6E7] rounded-lg hover:bg-[#E7E6E1] hover:text-[#537791] transition-colors mt-auto">
                         Read More
                     </button>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow flex flex-col h-full">
-                    <div class="w-full h-40 bg-blue-100 rounded-lg mb-4 overflow-hidden">
-                        <img src="https://womensfitness.co.uk/wp-content/uploads/sites/3/2022/08/the-eatwell-plate-balanced-diet-nutrition.jpg"
-                             alt="Diet Plate"
-                             class="w-full h-full object-cover">
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Diet Plans</h3>
-                    <p class="text-gray-600 mb-4 flex-grow">Customized nutrition plans tailored to your health goals.</p>
-                    <button class="w-full py-2 bg-[#537791] text-[#F7F6E7] rounded-lg hover:bg-[#E7E6E1] hover:text-[#537791] transition-colors mt-auto">
-                        Read More
-                    </button>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow flex flex-col h-full">
-                    <div class="w-full h-40 bg-blue-100 rounded-lg mb-4 overflow-hidden">
-                        <img src="https://img.freepik.com/free-photo/medical-stethoscope-white-surface_53876-95029.jpg"
-                             alt="Medical Consultation"
-                             class="w-full h-full object-cover object-[center_bottom]">
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Consult</h3>
-                    <p class="text-gray-600 mb-4 flex-grow">One-on-one consultations for holistic health guidance.</p>
-                    <button class="w-full py-2 bg-[#537791] text-[#F7F6E7] rounded-lg hover:bg-[#E7E6E1] hover:text-[#537791] transition-colors mt-auto">
-                        Read More
-                    </button>
-                </div>
-            </div>
+        <!-- Services Section -->
+<!--        <section id="services" class="py-12 bg-[#87C0CD] rounded-xl">-->
+<!--            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center">Our Services</h2>-->
+<!--            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">-->
+<!--                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow flex flex-col h-full">-->
+<!--                    <div class="w-full h-40 bg-blue-100 rounded-lg mb-4 overflow-hidden">-->
+<!--                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI7SuXzOA-2ncYcUT_Ih5ipVoNXUbWrMb5-Q&s"-->
+<!--                             alt="Yoga"-->
+<!--                             class="w-full h-full object-cover">-->
+<!--                    </div>-->
+<!--                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Yoga</h3>-->
+<!--                    <p class="text-gray-600 mb-4 flex-grow">Personalized yoga sessions for physical and mental wellbeing.</p>-->
+<!--                    <button class="w-full py-2 bg-[#537791] text-[#F7F6E7] rounded-lg hover:bg-[#E7E6E1] hover:text-[#537791] transition-colors mt-auto">-->
+<!--                        Read More-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow flex flex-col h-full">-->
+<!--                    <div class="w-full h-40 bg-blue-100 rounded-lg mb-4 overflow-hidden">-->
+<!--                        <img src="https://womensfitness.co.uk/wp-content/uploads/sites/3/2022/08/the-eatwell-plate-balanced-diet-nutrition.jpg"-->
+<!--                             alt="Diet Plate"-->
+<!--                             class="w-full h-full object-cover">-->
+<!--                    </div>-->
+<!--                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Diet Plans</h3>-->
+<!--                    <p class="text-gray-600 mb-4 flex-grow">Customized nutrition plans tailored to your health goals.</p>-->
+<!--                    <button class="w-full py-2 bg-[#537791] text-[#F7F6E7] rounded-lg hover:bg-[#E7E6E1] hover:text-[#537791] transition-colors mt-auto">-->
+<!--                        Read More-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow flex flex-col h-full">-->
+<!--                    <div class="w-full h-40 bg-blue-100 rounded-lg mb-4 overflow-hidden">-->
+<!--                        <img src="https://img.freepik.com/free-photo/medical-stethoscope-white-surface_53876-95029.jpg"-->
+<!--                             alt="Medical Consultation"-->
+<!--                             class="w-full h-full object-cover object-[center_bottom]">-->
+<!--                    </div>-->
+<!--                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Consult</h3>-->
+<!--                    <p class="text-gray-600 mb-4 flex-grow">One-on-one consultations for holistic health guidance.</p>-->
+<!--                    <button class="w-full py-2 bg-[#537791] text-[#F7F6E7] rounded-lg hover:bg-[#E7E6E1] hover:text-[#537791] transition-colors mt-auto">-->
+<!--                        Read More-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </div>-->
+                {% endfor %}
         </section>
     </main>
 

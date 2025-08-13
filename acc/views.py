@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.mail import send_mail
 from django.http import HttpResponse
-
-from .models import Blog, AboutMe, SocialLinks
+from django_ratelimit.decorators import ratelimit
+from disposable_email_domains import blocklist
+from django.core.exceptions import ValidationError
+from .models import Blog, AboutMe, SocialLinks, Services
 
 
 # common context for all views
@@ -10,6 +12,7 @@ def common_context():
     return {
         'about_me' : AboutMe.objects.first(),
         'posts' : Blog.objects.all().order_by("-created_at"),
+        'service' : Services.objects.all(),
         'links' : SocialLinks.objects.first()
     }
 # admin service
@@ -24,8 +27,12 @@ def blog_short(request):
 def social_view(request):
     return render(request, "Aatmbhav.html", common_context())
 
-
+def service_view(request):
+    context = common_context()
+    # context['posts'] = context['posts'][:3]
+    return render(request, "Aatmbhav.html", common_context())
 # smtp service
+@ratelimit(key='ip', rate='3/m', block=True)
 def mail(request):
     if request.method == "POST":
         name = request.POST.get('name')
@@ -33,6 +40,13 @@ def mail(request):
         phone = request.POST.get('phone')
         service = request.POST.get('service')
         message = request.POST.get('message')
+
+        def clean_email(self):
+            email = self.cleaned_data['email']
+            domain = email.split('@')[-1].lower()
+            if domain in blocklist:
+                raise ValidationError("Temporary emails are not allowed.")
+            return email
 
         msg = "Hello you've got an mail"
         admin = "mkav8888@gmail.com"
