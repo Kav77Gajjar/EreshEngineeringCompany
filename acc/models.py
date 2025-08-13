@@ -3,6 +3,7 @@ from django.utils.text import slugify
 
 class AboutMe(models.Model):
     title = models.CharField(max_length=100)
+    img_url_for_about = models.URLField(blank=True, null=True)
     content = models.TextField()
 
     class Meta:
@@ -34,8 +35,8 @@ class Services(models.Model):
     service_image_url = models.URLField()
 
     class Meta:
-        verbose_name = "Service"
-        verbose_name_plural = "Services"
+        verbose_name = "Our Service"
+        verbose_name_plural = "Our Services"
 
     def __str__(self):
         return self.title

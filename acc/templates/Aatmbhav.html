@@ -116,7 +116,7 @@
                     <!-- Doctor's Photo -->
                     <div class="w-full md:w-1/2 flex justify-center">
                         <div class="bg-blue-100 rounded-full overflow-hidden shadow-lg w-64 h-64">
-                            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+                            <img src="{{ about_me.img_url_for_about }}"
                                  alt="Doctor"
                                  class="w-full h-full object-cover">
                         </div>
@@ -148,47 +148,48 @@
                         Read More
                     </button>
                 </div>
-        <!-- Services Section -->
-<!--        <section id="services" class="py-12 bg-[#87C0CD] rounded-xl">-->
-<!--            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center">Our Services</h2>-->
-<!--            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">-->
-<!--                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow flex flex-col h-full">-->
-<!--                    <div class="w-full h-40 bg-blue-100 rounded-lg mb-4 overflow-hidden">-->
-<!--                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI7SuXzOA-2ncYcUT_Ih5ipVoNXUbWrMb5-Q&s"-->
-<!--                             alt="Yoga"-->
-<!--                             class="w-full h-full object-cover">-->
-<!--                    </div>-->
-<!--                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Yoga</h3>-->
-<!--                    <p class="text-gray-600 mb-4 flex-grow">Personalized yoga sessions for physical and mental wellbeing.</p>-->
-<!--                    <button class="w-full py-2 bg-[#537791] text-[#F7F6E7] rounded-lg hover:bg-[#E7E6E1] hover:text-[#537791] transition-colors mt-auto">-->
-<!--                        Read More-->
-<!--                    </button>-->
-<!--                </div>-->
-<!--                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow flex flex-col h-full">-->
-<!--                    <div class="w-full h-40 bg-blue-100 rounded-lg mb-4 overflow-hidden">-->
-<!--                        <img src="https://womensfitness.co.uk/wp-content/uploads/sites/3/2022/08/the-eatwell-plate-balanced-diet-nutrition.jpg"-->
-<!--                             alt="Diet Plate"-->
-<!--                             class="w-full h-full object-cover">-->
-<!--                    </div>-->
-<!--                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Diet Plans</h3>-->
-<!--                    <p class="text-gray-600 mb-4 flex-grow">Customized nutrition plans tailored to your health goals.</p>-->
-<!--                    <button class="w-full py-2 bg-[#537791] text-[#F7F6E7] rounded-lg hover:bg-[#E7E6E1] hover:text-[#537791] transition-colors mt-auto">-->
-<!--                        Read More-->
-<!--                    </button>-->
-<!--                </div>-->
-<!--                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow flex flex-col h-full">-->
-<!--                    <div class="w-full h-40 bg-blue-100 rounded-lg mb-4 overflow-hidden">-->
-<!--                        <img src="https://img.freepik.com/free-photo/medical-stethoscope-white-surface_53876-95029.jpg"-->
-<!--                             alt="Medical Consultation"-->
-<!--                             class="w-full h-full object-cover object-[center_bottom]">-->
-<!--                    </div>-->
-<!--                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Consult</h3>-->
-<!--                    <p class="text-gray-600 mb-4 flex-grow">One-on-one consultations for holistic health guidance.</p>-->
-<!--                    <button class="w-full py-2 bg-[#537791] text-[#F7F6E7] rounded-lg hover:bg-[#E7E6E1] hover:text-[#537791] transition-colors mt-auto">-->
-<!--                        Read More-->
-<!--                    </button>-->
-<!--                </div>-->
-<!--            </div>-->
+
+<!--         Services Section -->
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">
+                {% empty %}
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow flex flex-col h-full">
+                    <div class="w-full h-40 bg-blue-100 rounded-lg mb-4 overflow-hidden">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI7SuXzOA-2ncYcUT_Ih5ipVoNXUbWrMb5-Q&s"
+                             alt="Yoga"
+                             class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Yoga</h3>
+                    <p class="text-gray-600 mb-4 flex-grow">Personalized yoga sessions for physical and mental wellbeing.</p>
+                    <button class="w-full py-2 bg-[#537791] text-[#F7F6E7] rounded-lg hover:bg-[#E7E6E1] hover:text-[#537791] transition-colors mt-auto">
+                        Read More
+                    </button>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow flex flex-col h-full">
+                    <div class="w-full h-40 bg-blue-100 rounded-lg mb-4 overflow-hidden">
+                        <img src="https://womensfitness.co.uk/wp-content/uploads/sites/3/2022/08/the-eatwell-plate-balanced-diet-nutrition.jpg"
+                             alt="Diet Plate"
+                             class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Diet Plans</h3>
+                    <p class="text-gray-600 mb-4 flex-grow">Customized nutrition plans tailored to your health goals.</p>
+                    <button class="w-full py-2 bg-[#537791] text-[#F7F6E7] rounded-lg hover:bg-[#E7E6E1] hover:text-[#537791] transition-colors mt-auto">
+                        Read More
+                    </button>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow flex flex-col h-full">
+                    <div class="w-full h-40 bg-blue-100 rounded-lg mb-4 overflow-hidden">
+                        <img src="https://img.freepik.com/free-photo/medical-stethoscope-white-surface_53876-95029.jpg"
+                             alt="Medical Consultation"
+                             class="w-full h-full object-cover object-[center_bottom]">
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Consult</h3>
+                    <p class="text-gray-600 mb-4 flex-grow">One-on-one consultations for holistic health guidance.</p>
+                    <button class="w-full py-2 bg-[#537791] text-[#F7F6E7] rounded-lg hover:bg-[#E7E6E1] hover:text-[#537791] transition-colors mt-auto">
+                        Read More
+                    </button>
+                </div>
+            </div>
                 {% endfor %}
         </section>
     </main>
@@ -216,9 +217,9 @@
                         <p class="text-gray-600 mb-4">{{ post.content|truncatewords:15 }}...</p>
                     </div>
                     <div class="px-6 pb-6">
-                        <button class="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+                        <a href="{% url 'blog_detail' post.slug %}" class="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors block text-center">
                             Read More
-                        </button>
+                        </a>
                     </div>
                 </div>
                 {% empty %}
@@ -313,7 +314,7 @@
                 </div>
             </div>
             <div class="border-t border-[#87C0CD] mt-8 pt-6 text-center text-[#F3F9FB]">
-                <p>&copy; 2023 Aatmbhav. All rights reserved.</p>
+                <p>&copy; 2025 Aatmbhav. All rights reserved.</p>
             </div>
         </div>
     </footer>

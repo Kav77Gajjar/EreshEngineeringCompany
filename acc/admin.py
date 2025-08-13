@@ -12,7 +12,6 @@ admin.site.register(AboutMe)
 admin.site.register(SocialLinks)
 admin.site.register(Services)
 
-
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
     list_display = ('title', 'created_at', 'slug')
@@ -65,8 +64,4 @@ class CustomUserAdmin(admin.ModelAdmin):
 
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
-
-
-
-
 

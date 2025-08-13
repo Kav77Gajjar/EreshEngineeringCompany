@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ blog_detail.title }} - Aatmbhav</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom styles for blog content */
+        .blog-content {
+            line-height: 1.8;
+        }
+        .blog-content p {
+            margin-bottom: 1rem;
+        }
+        .blog-content h1, .blog-content h2, .blog-content h3 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Header Section -->
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4">
+            <nav class="flex items-center justify-between">
+                <!-- Logo and Brand Name -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full bg-[#113F67] flex items-center justify-center">
+                        <i class="fas fa-rocket text-white text-xl"></i>
+                    </div>
+                    <a href="/" class="text-2xl font-bold text-[#113F67] hover:text-[#87C0CD] transition-colors">
+                        Aatmbhav
+                    </a>
+                </div>
+
+                <!-- Navigation -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="/" class="text-gray-700 hover:text-[#113F67] transition-colors">Home</a>
+                    <a href="/#about" class="text-gray-700 hover:text-[#113F67] transition-colors">About</a>
+                    <a href="/#services" class="text-gray-700 hover:text-[#113F67] transition-colors">Services</a>
+                    <a href="/#blog" class="text-gray-700 hover:text-[#113F67] transition-colors">Blog</a>
+                    <a href="/#contact" class="text-gray-700 hover:text-[#113F67] transition-colors">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Blog Article Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Back to Blog Link -->
+            <div class="mb-6">
+                <a href="/#blog" class="inline-flex items-center text-[#113F67] hover:text-[#87C0CD] transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Back to Blog
+                </a>
+            </div>
+
+            <!-- Article Header -->
+            <article class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <!-- Featured Image -->
+                {% if blog_detail.image_url %}
+                <div class="w-full h-64 md:h-96 overflow-hidden">
+                    <img src="{{ blog_detail.image_url }}"
+                         alt="{{ blog_detail.title }}"
+                         class="w-full h-full object-cover">
+                </div>
+                {% endif %}
+
+                <!-- Article Content -->
+                <div class="p-6 md:p-8">
+                    <!-- Article Meta -->
+                    <div class="mb-4">
+                        <div class="flex items-center text-sm text-gray-500 mb-2">
+                            <i class="far fa-calendar-alt mr-2"></i>
+                            <time datetime="{{ blog_detail.created_at|date:'Y-m-d' }}">
+                                {{ blog_detail.created_at|date:"F d, Y" }}
+                            </time>
+                        </div>
+                    </div>
+
+                    <!-- Article Title -->
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                        {{ blog_detail.title }}
+                    </h1>
+
+                    <!-- Article Content -->
+                    <div class="blog-content prose max-w-none text-gray-700 text-lg">
+                        {{ blog_detail.content|linebreaks }}
+                    </div>
+
+                    <!-- Article Footer -->
+                    <div class="mt-8 pt-6 border-t border-gray-200">
+                        <div class="flex items-center justify-between">
+                            <div class="text-sm text-gray-500">
+                                <i class="far fa-clock mr-1"></i>
+                                Published on {{ blog_detail.created_at|date:"F d, Y" }}
+                            </div>
+
+                            <!-- Social Share Buttons -->
+                            <div class="flex items-center space-x-3">
+                                <span class="text-sm text-gray-500">Share:</span>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
+                                   target="_blank"
+                                   class="text-blue-600 hover:text-blue-800 transition-colors">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ blog_detail.title }}"
+                                   target="_blank"
+                                   class="text-blue-400 hover:text-blue-600 transition-colors">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri }}"
+                                   target="_blank"
+                                   class="text-blue-700 hover:text-blue-900 transition-colors">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Navigation to Other Posts -->
+            <div class="mt-8 flex justify-center">
+                <a href="/#blog"
+                   class="inline-flex items-center px-6 py-3 bg-[#113F67] text-white rounded-lg hover:bg-[#87C0CD] transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    View More Articles
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-[#113F67] text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Aatmbhav</h3>
+                    <p class="text-gray-300">Providing holistic wellness solutions through yoga, nutrition, and personalized consultations.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="/#about" class="text-gray-300 hover:text-white transition-colors">About</a></li>
+                        <li><a href="/#services" class="text-gray-300 hover:text-white transition-colors">Services</a></li>
+                        <li><a href="/#blog" class="text-gray-300 hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="/#contact" class="text-gray-300 hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contact Info</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-center"><i class="fas fa-map-marker-alt mr-2"></i> 123 Wellness St, City</li>
+                        <li class="flex items-center"><i class="fas fa-phone mr-2"></i> +1 234 567 890</li>
+                        <li class="flex items-center"><i class="fas fa-envelope mr-2"></i> info@aatmbhav.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-600 mt-8 pt-6 text-center text-gray-300">
+                <p>&copy; 2025 Aatmbhav. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+    </script>
+</body>
+</html>
