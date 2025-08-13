@@ -7,52 +7,84 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Custom styles for blog content */
-        .blog-content {
-            line-height: 1.8;
+        html {
+  scroll-behavior: smooth;
+}
+        /* Custom styles for hover effects */
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
         }
-        .blog-content p {
-            margin-bottom: 1rem;
+        .nav-link:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white !important;
+            transform: scale(1.05);
         }
-        .blog-content h1, .blog-content h2, .blog-content h3 {
-            margin-top: 2rem;
-            margin-bottom: 1rem;
+
+        header {
+            transition: transform 0.3s ease-in-out;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
-        .blog-content ul, .blog-content ol {
-            margin-bottom: 1rem;
-            padding-left: 2rem;
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+            padding: 0.5rem 1rem;
+        }
+        .nav-link:hover {
+            color: #87C0CD !important;
+        }
+        header.hide {
+            transform: translateY(-100%);
         }
     </style>
 </head>
 <body class="font-sans bg-gray-50">
     <!-- Header Section -->
-    <header class="bg-white shadow-sm">
-        <div class="container mx-auto px-4 py-4">
+   <header class="fixed top-0 w-full z-50 bg-transparent">
+        <div class="container mx-auto px-4 py-3">
             <nav class="flex items-center justify-between">
                 <!-- Logo and Brand Name -->
                 <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-full bg-[#113F67] flex items-center justify-center">
-                        <i class="fas fa-rocket text-white text-xl"></i>
-                    </div>
-                    <a href="/" class="text-2xl font-bold text-[#113F67] hover:text-[#87C0CD] transition-colors">
-                        Aatmbhav
+<!--                    <div class="w-10 h-10 rounded-full bg-[#113F67] flex items-center justify-center">-->
+<!--                        <i class="fas fa-rocket text-[#F3F9FB] text-xl"></i>-->
+                            <img src="{{ hero.brand_logo }}" alt="Logo" class="w-8 h-8">
+<!--                    </div>-->
+                    <a href="{{ hero.website }}" class="text-2xl font-bold text-[#F3F9FB] hover:text-[#87C0CD] transition-colors">
+                        {{ hero.brand_name|default:"Aatmbhav" }}
                     </a>
                 </div>
 
-                <!-- Navigation -->
-                <div class="hidden md:flex items-center space-x-6">
-                    <a href="/" class="text-gray-700 hover:text-[#113F67] transition-colors">Home</a>
-                    <a href="/#about" class="text-gray-700 hover:text-[#113F67] transition-colors">About</a>
-                    <a href="/#services" class="text-gray-700 hover:text-[#113F67] transition-colors">Services</a>
-                    <a href="/#blog" class="text-gray-700 hover:text-[#113F67] transition-colors">Blog</a>
-                    <a href="/#contact" class="text-gray-700 hover:text-[#113F67] transition-colors">Contact</a>
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-2 ml-16">
+                    <a href="{{ url }}" class="nav-link text-[#113F67] hover:text-[#87C0CD] font-medium transition-colors duration-300">Home</a>
+                    <a href="#about" class="nav-link text-[#113F67] hover:text-[#87C0CD] font-medium transition-colors duration-300">About Me</a>
+                    <a href="#services" class="nav-link text-[#113F67] hover:text-[#87C0CD] font-medium transition-colors duration-300">Services</a>
+                    <a href="#blog" class="nav-link text-[#113F67] hover:text-[#87C0CD] font-medium transition-colors duration-300">Blog</a>
+                    <a href="#contact" class="nav-link text-[#113F67] hover:text-[#87C0CD] font-medium transition-colors duration-300">Contact</a>
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
-                    <i class="fas fa-bars text-2xl"></i>
+                <button id="mobile-menu-button" class="md:hidden text-[#113F67] focus:outline-none">
+                    <i id="menu-icon" class="fas fa-bars text-2xl transition-transform duration-300"></i>
                 </button>
             </nav>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 opacity-0 pointer-events-none">
+            <div class="absolute top-16 right-0 w-full bg-white shadow-lg transform transition-transform duration-300 ease-in-out translate-y-[-100%]">
+                <div class="flex flex-col space-y-2 px-4 py-4">
+                <a href="#home" class="block w-full px-4 py-3 text-[#113F67] hover:text-[#87C0CD] transition-colors duration-300">Home</a>
+                <a href="#about" class="block w-full px-4 py-3 text-[#113F67] hover:text-[#87C0CD] transition-colors duration-300">About Me</a>
+                <a href="#services" class="block w-full px-4 py-3 text-[#113F67] hover:text-[#87C0CD] transition-colors duration-300">Services</a>
+                <a href="#blog" class="block w-full px-4 py-3 text-[#113F67] hover:text-[#87C0CD] transition-colors duration-300">Blog</a>
+                <a href="#contact" class="block w-full px-4 py-3 text-[#113F67] hover:text-[#87C0CD] transition-colors duration-300">Contact</a>
+            </div>
         </div>
     </header>
 
@@ -157,48 +189,159 @@
     </main>
 
     <!-- Footer Section -->
-    <footer class="bg-[#113F67] text-white py-8 mt-12">
+    <footer class="bg-[#113F67] text-[#F3F9FB] py-8">
         <div class="container mx-auto px-4">
             <div class="grid md:grid-cols-3 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4">Aatmbhav</h3>
-                    <p class="text-gray-300">Providing holistic wellness solutions through yoga, nutrition, and personalized consultations.</p>
-                </div>
+
                 <div>
                     <h3 class="text-xl font-bold mb-4">Quick Links</h3>
                     <ul class="space-y-2">
-                        <li><a href="/" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
-                        <li><a href="/#about" class="text-gray-300 hover:text-white transition-colors">About</a></li>
-                        <li><a href="/#services" class="text-gray-300 hover:text-white transition-colors">Services</a></li>
-                        <li><a href="/#blog" class="text-gray-300 hover:text-white transition-colors">Blog</a></li>
-                        <li><a href="/#contact" class="text-gray-300 hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="#home" class="text-[#F3F9FB] hover:text-[#87C0CD] transition-colors">Home</a></li>
+                        <li><a href="#about" class="text-[#F3F9FB] hover:text-[#87C0CD] transition-colors">About</a></li>
+                        <li><a href="#services" class="text-[#F3F9FB] hover:text-[#87C0CD] transition-colors">Services</a></li>
+                        <li><a href="#blog" class="text-[#F3F9FB] hover:text-[#87C0CD] transition-colors">Blog</a></li>
+                        <li><a href="#contact" class="text-[#F3F9FB] hover:text-[#87C0CD] transition-colors">Contact</a></li>
                     </ul>
                 </div>
                 <div>
                     <h3 class="text-xl font-bold mb-4">Contact Info</h3>
-                    <ul class="space-y-2 text-gray-300">
-                        <li class="flex items-center"><i class="fas fa-map-marker-alt mr-2"></i> 123 Wellness St, City</li>
-                        <li class="flex items-center"><i class="fas fa-phone mr-2"></i> +1 234 567 890</li>
-                        <li class="flex items-center"><i class="fas fa-envelope mr-2"></i> info@aatmbhav.com</li>
-                    </ul>
+                        <ul class="space-y-2 text-[#F7F6E7]">
+                            <li class="flex items-center">
+                                <a href="#">
+                                    <i class="fas fa-map-marker-alt mr-2"></i>
+                                    {{ contact.address|default:"Junagadh, Gujarat, India" }}
+                                </a>
+                            </li>
+
+                            {% if contact.phone %}
+                            <li class="flex items-center">
+                                <a href="tel:{{ contact.phone }}">
+                                    <i class="fas fa-phone mr-2"></i>
+                                    {{ contact.phone_title|default:"Book an appointment" }}
+                                </a>
+                            </li>
+                            {% else %}
+                            <li class="flex items-center">
+                                <a href="https://wa.me/{{ contact.whatsapp|urlencode }}?text=Hello%20I%20want%20to%20know%20more%20about%20your%20services">
+                                    <i class="fas fa-phone mr-2"></i>
+                                    {{ contact.whatsapp_title|default:"Book an appointment" }}
+                                </a>
+                            </li>
+                            {% endif %}
+
+                            <li class="flex items-center">
+                                <a href="mailto:{{ contact.email }}">
+                                    <i class="fas fa-envelope mr-2"></i>
+                                    {{ contact.email_title|default:"Mail us" }}
+                                </a>
+                            </li>
+                        </ul>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="{{ links.facebook }}" class="text-[#F7F6E7] hover:text-[#C1C0B9] transition-colors"><i class="fab fa-facebook-f"></i></a>
+                        <a href="{{ links.twitter }}" class="text-[#F7F6E7] hover:text-[#C1C0B9] transition-colors"><i class="fab fa-twitter"></i></a>
+                        <a href="{{ links.instagram }}" class="text-[#F7F6E7] hover:text-[#C1C0B9] transition-colors"><i class="fab fa-instagram"></i></a>
+                        <a href="{{ links.linkedin }}" class="text-[#F7F6E7] hover:text-[#C1C0B9] transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
                 </div>
             </div>
-            <div class="border-t border-gray-600 mt-8 pt-6 text-center text-gray-300">
+            <div class="border-t border-[#87C0CD] mt-8 pt-6 text-center text-[#F3F9FB]">
                 <p>&copy; 2025 Aatmbhav. All rights reserved.</p>
+                <p class="text-sm mt-2">Made with ❤️ by Jethva Bhavansi</p>
             </div>
         </div>
     </footer>
 
     <script>
+        // Scroll handling for header
+        let lastScroll = 0;
+        const header = document.querySelector('header');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll <= 0) {
+                header.classList.remove('hide');
+                return;
+            }
+
+            if (currentScroll > lastScroll && !header.classList.contains('hide')) {
+                // Scrolling down
+                header.classList.add('hide');
+            } else if (currentScroll < lastScroll && header.classList.contains('hide')) {
+                // Scrolling up
+                header.classList.remove('hide');
+            }
+
+            lastScroll = currentScroll;
+        });
+
         // Mobile menu toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
 
-        if (mobileMenuButton) {
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
+        mobileMenuButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+
+            // Check if menu is currently hidden
+            if (mobileMenu.classList.contains('hidden')) {
+                // Show menu
+                mobileMenu.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
+                mobileMenu.classList.add('opacity-100', 'pointer-events-auto');
+                mobileMenu.querySelector('div').classList.remove('translate-y-[-100%]');
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+            } else {
+                // Hide menu
+                mobileMenu.querySelector('div').classList.add('translate-y-[-100%]');
+                mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+                mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                }, 300);
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            }
+        });
+
+        // Close menu when clicking on links
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                // Hide menu when link is clicked
+                mobileMenu.querySelector('div').classList.add('translate-y-[-100%]');
+                mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+                mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                }, 300);
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
             });
-        }
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!mobileMenu.contains(event.target) &&
+                event.target !== mobileMenuButton &&
+                !mobileMenuButton.contains(event.target)) {
+                // Hide menu when clicking outside
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.querySelector('div').classList.add('translate-y-[-100%]');
+                    mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+                    mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
+                    setTimeout(() => {
+                        mobileMenu.classList.add('hidden');
+                    }, 300);
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                }
+            }
+        });
+
+        // Prevent menu from closing when clicking inside it
+        mobileMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
     </script>
 </body>
 </html>
