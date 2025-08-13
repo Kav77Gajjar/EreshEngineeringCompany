@@ -26,7 +26,7 @@ def about_me_view(request):
 
 def blog_list(request):
     blogs = Blog.objects.all().order_by("-created_at")
-    return render(request, "article.html", blogs, {'blogs': blogs})
+    return render(request, "morecards.html", {'blogs': blogs})
 
 def blog_short(request):
     context = common_context()
@@ -36,6 +36,10 @@ def blog_short(request):
 def blog_detail(request, slug):
     blog_detail = get_object_or_404(Blog, slug=slug)
     return render(request, 'article.html', {'blog_detail': blog_detail})
+
+def service_detail(request, slug):
+    service = get_object_or_404(Services, slug=slug)
+    return render(request, 'service.html', {'service': service})
 
 def social_view(request):
     return render(request, "Aatmbhav.html", common_context())

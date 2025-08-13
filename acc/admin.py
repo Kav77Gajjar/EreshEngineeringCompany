@@ -11,8 +11,28 @@ admin.site.index_title = "Welcome to Aatmabhav's Admin Dashboard"
 admin.site.register(HeroSection)
 admin.site.register(AboutMe)
 admin.site.register(SocialLinks)
-admin.site.register(Services)
 admin.site.register(ContactInfo)
+admin.site.register(ServiceFeature)
+
+class ServiceFeatureInline(admin.TabularInline):
+    model = ServiceFeature
+    extra = 1
+
+@admin.register(Services)
+class ServicesAdmin(admin.ModelAdmin):
+    list_display = ('title', 'slug', 'service_image_url')
+    list_filter = ('title',)
+    search_fields = ('title', 'description')
+    prepopulated_fields = {'slug': ('title',)}
+    fields = ('title', 'slug', 'service_image_url', 'description')
+
+    class Media:
+        css = {
+            'all': ('admin/css/widgets.css',)
+        }
+
+
+
 
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):

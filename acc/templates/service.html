@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ service.title }} - Aatmbhav</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom styles for service content */
+        .service-content {
+            line-height: 1.8;
+        }
+        .service-content p {
+            margin-bottom: 1rem;
+        }
+        .service-content h1, .service-content h2, .service-content h3 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .service-content ul, .service-content ol {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Header Section -->
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4">
+            <nav class="flex items-center justify-between">
+                <!-- Logo and Brand Name -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full bg-[#113F67] flex items-center justify-center">
+                        <i class="fas fa-rocket text-white text-xl"></i>
+                    </div>
+                    <a href="/" class="text-2xl font-bold text-[#113F67] hover:text-[#87C0CD] transition-colors">
+                        Aatmbhav
+                    </a>
+                </div>
+
+                <!-- Navigation -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="/" class="text-gray-700 hover:text-[#113F67] transition-colors">Home</a>
+                    <a href="/#about" class="text-gray-700 hover:text-[#113F67] transition-colors">About</a>
+                    <a href="/#services" class="text-gray-700 hover:text-[#113F67] transition-colors">Services</a>
+                    <a href="/#blog" class="text-gray-700 hover:text-[#113F67] transition-colors">Blog</a>
+                    <a href="/#contact" class="text-gray-700 hover:text-[#113F67] transition-colors">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Service Detail Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Back to Services Link -->
+            <div class="mb-6">
+                <a href="/#services" class="inline-flex items-center text-[#113F67] hover:text-[#87C0CD] transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Back to Services
+                </a>
+            </div>
+
+            <!-- Service Header -->
+            <article class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <!-- Featured Image -->
+                {% if service.service_image_url %}
+                <div class="w-full h-64 md:h-96 overflow-hidden">
+                    <img src="{{ service.service_image_url }}"
+                         alt="{{ service.title }}"
+                         class="w-full h-full object-cover">
+                </div>
+                {% endif %}
+
+                <!-- Service Content -->
+                <div class="p-6 md:p-8">
+                    <!-- Service Title -->
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                        {{ service.title }}
+                    </h1>
+
+                    <!-- Service Description -->
+                    <div class="service-content prose max-w-none text-gray-700 text-lg">
+                        {{ service.description|linebreaks }}
+                    </div>
+
+                    <!-- Service Features (if you want to add more details) -->
+                    {% if service.features.exists %}
+                    <div class="mt-8 p-6 bg-gray-50 rounded-lg">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">What's Included:</h3>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            {% for feature in service.features.all %}
+                                <li>{{ feature.feature_text }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+
+                    <!-- Contact CTA -->
+                    <div class="mt-8 pt-6 border-t border-gray-200">
+                        <div class="flex flex-col md:flex-row items-center justify-between">
+                            <div class="mb-4 md:mb-0">
+                                <h4 class="text-lg font-semibold text-gray-800">Ready to get started?</h4>
+                                <p class="text-gray-600">Contact us to learn more about this service.</p>
+                            </div>
+                            <a href="/#contact"
+                               class="inline-flex items-center px-6 py-3 bg-[#113F67] text-white rounded-lg hover:bg-[#87C0CD] transition-colors">
+                                <i class="fas fa-envelope mr-2"></i>
+                                Get In Touch
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Navigation to Other Services -->
+            <div class="mt-8 flex justify-center">
+                <a href="/services/"
+                   class="inline-flex items-center px-6 py-3 bg-[#113F67] text-white rounded-lg hover:bg-[#87C0CD] transition-colors">
+                    <i class="fas fa-th-large mr-2"></i>
+                    View All Services
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-[#113F67] text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Aatmbhav</h3>
+                    <p class="text-gray-300">Providing holistic wellness solutions through yoga, nutrition, and personalized consultations.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="/#about" class="text-gray-300 hover:text-white transition-colors">About</a></li>
+                        <li><a href="/#services" class="text-gray-300 hover:text-white transition-colors">Services</a></li>
+                        <li><a href="/#blog" class="text-gray-300 hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="/#contact" class="text-gray-300 hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contact Info</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-center"><i class="fas fa-map-marker-alt mr-2"></i> 123 Wellness St, City</li>
+                        <li class="flex items-center"><i class="fas fa-phone mr-2"></i> +1 234 567 890</li>
+                        <li class="flex items-center"><i class="fas fa-envelope mr-2"></i> info@aatmbhav.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-600 mt-8 pt-6 text-center text-gray-300">
+                <p>&copy; 2025 Aatmbhav. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ service.title }} - Aatmbhav</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom styles for service content */
+        .service-content {
+            line-height: 1.8;
+        }
+        .service-content p {
+            margin-bottom: 1rem;
+        }
+        .service-content h1, .service-content h2, .service-content h3 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .service-content ul, .service-content ol {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Header Section -->
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4">
+            <nav class="flex items-center justify-between">
+                <!-- Logo and Brand Name -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full bg-[#113F67] flex items-center justify-center">
+                        <i class="fas fa-rocket text-white text-xl"></i>
+                    </div>
+                    <a href="/" class="text-2xl font-bold text-[#113F67] hover:text-[#87C0CD] transition-colors">
+                        Aatmbhav
+                    </a>
+                </div>
+
+                <!-- Navigation -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="/" class="text-gray-700 hover:text-[#113F67] transition-colors">Home</a>
+                    <a href="/#about" class="text-gray-700 hover:text-[#113F67] transition-colors">About</a>
+                    <a href="/#services" class="text-gray-700 hover:text-[#113F67] transition-colors">Services</a>
+                    <a href="/#blog" class="text-gray-700 hover:text-[#113F67] transition-colors">Blog</a>
+                    <a href="/#contact" class="text-gray-700 hover:text-[#113F67] transition-colors">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+
+    <div class="grid md:grid-cols-3 gap-8">
+            {% for post in blogs %}
+
+                    <!-- Dynamic Article -->
+                    <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden flex flex-col">
+                        {% if post.image_url %}
+                        <div class="h-48 bg-blue-100 overflow-hidden">
+                            <img src="{{ post.image_url }}" alt="{{ post.title }}" class="w-full h-full object-cover">
+                        </div>
+                        {% else %}
+                        <div class="h-48 bg-blue-100 flex items-center justify-center">
+                            <i class="fas fa-newspaper text-blue-500 text-5xl"></i>
+                        </div>
+                        {% endif %}
+                        <div class="p-6 flex-grow">
+                            <div class="text-sm text-gray-500 mb-2">Posted on {{ post.created_at|date:"F d, Y" }}</div>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ post.title }}</h3>
+                            <p class="text-gray-600 mb-4">{{ post.content|truncatewords:15 }}...</p>
+                        </div>
+                        <div class="px-6 pb-6">
+                            <a href="{% url 'blog_detail' post.slug %}" class="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors block text-center">
+                                Read More
+                            </a>
+                        </div>
+                    </div>
+
+
+            {% endfor %}
+        </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-[#113F67] text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Aatmbhav</h3>
+                    <p class="text-gray-300">Providing holistic wellness solutions through yoga, nutrition, and personalized consultations.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="/#about" class="text-gray-300 hover:text-white transition-colors">About</a></li>
+                        <li><a href="/#services" class="text-gray-300 hover:text-white transition-colors">Services</a></li>
+                        <li><a href="/#blog" class="text-gray-300 hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="/#contact" class="text-gray-300 hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contact Info</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-center"><i class="fas fa-map-marker-alt mr-2"></i> 123 Wellness St, City</li>
+                        <li class="flex items-center"><i class="fas fa-phone mr-2"></i> +1 234 567 890</li>
+                        <li class="flex items-center"><i class="fas fa-envelope mr-2"></i> info@aatmbhav.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-600 mt-8 pt-6 text-center text-gray-300">
+                <p>&copy; 2025 Aatmbhav. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+    </script>
+</body>
+</html>

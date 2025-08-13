@@ -36,6 +36,11 @@ class Blog(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        verbose_name = "Blog"
+        verbose_name_plural = "Blogs"
+        ordering = ['-created_at']
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
@@ -47,16 +52,32 @@ class Blog(models.Model):
 
 class Services(models.Model):
     title = models.CharField(max_length=100)
+    slug = models.SlugField(unique=True, blank=True)
     description = models.TextField()
     service_image_url = models.URLField()
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
     class Meta:
-        verbose_name = "Our Service"
-        verbose_name_plural = "Our Services"
+        verbose_name = "Service"
+        verbose_name_plural = "Services"
 
     def __str__(self):
         return self.title
 
+class ServiceFeature(models.Model):
+    service = models.ForeignKey(Services,related_name="features" , on_delete=models.CASCADE)
+    feature_text = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name = "Service Feature"
+        verbose_name_plural = "Service Features"
+
+    def __str__(self):
+        return f"{self.service.title} - {self.feature_text}"
 
 
 class SocialLinks(models.Model):
