@@ -18,9 +18,9 @@ class HeroSection(models.Model):
         return self.title
 
 class AboutMe(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, blank=True, null=True)
     img_url_for_about = models.URLField(blank=True, null=True)
-    content = models.TextField()
+    content = models.TextField(blank=True, null=True)
 
     class Meta:
         verbose_name = "About Me"
@@ -69,6 +69,23 @@ class SocialLinks(models.Model):
     class Meta:
         verbose_name = "Social Media Links"
         verbose_name_plural = "Social Media Links"
+
+    def __str__(self):
+        return self.title
+
+class ContactInfo(models.Model):
+    title = models.CharField(max_length=100,blank=True, null=True)
+    email_title = models.CharField(max_length=50, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    phone_title = models.CharField(max_length=50, blank=True, null=True)
+    phone = models.CharField(max_length=15, blank=True, null=True)
+    address = models.CharField(max_length=50, blank=True, null=True)
+    whatsapp_title = models.CharField(max_length=50, blank=True, null=True)
+    whatsapp = models.CharField(blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Contact Info"
+        verbose_name_plural = "Contact Info"
 
     def __str__(self):
         return self.title

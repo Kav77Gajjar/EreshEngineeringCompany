@@ -12,6 +12,7 @@ admin.site.register(HeroSection)
 admin.site.register(AboutMe)
 admin.site.register(SocialLinks)
 admin.site.register(Services)
+admin.site.register(ContactInfo)
 
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):

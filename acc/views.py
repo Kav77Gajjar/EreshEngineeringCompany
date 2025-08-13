@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django_ratelimit.decorators import ratelimit
 from disposable_email_domains import blocklist
 from django.core.exceptions import ValidationError
-from .models import Blog, AboutMe, SocialLinks, Services, HeroSection
+from .models import Blog, AboutMe, SocialLinks, Services, HeroSection, ContactInfo
 
 
 # common context for all views
@@ -14,7 +14,8 @@ def common_context():
         'about_me' : AboutMe.objects.first(),
         'posts' : Blog.objects.all().order_by("-created_at"),
         'service' : Services.objects.all(),
-        'links' : SocialLinks.objects.all()
+        'links' : SocialLinks.objects.all(),
+        'contact' : ContactInfo.objects.first()
     }
 # admin service
 def hero_view(request):
@@ -43,6 +44,11 @@ def service_view(request):
     context = common_context()
     # context['posts'] = context['posts'][:3]
     return render(request, "Aatmbhav.html", common_context())
+
+def contact_view(request):
+    return render(request, "Aatmbhav.html", common_context())
+
+
 # smtp service
 @ratelimit(key='ip', rate='3/m', block=True)
 def mail(request):

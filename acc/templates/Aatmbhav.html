@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="" type="image/x-icon">
     <style>
+        html {
+  scroll-behavior: smooth;
+}
         /* Custom styles for hover effects */
         .nav-link {
             position: relative;
@@ -107,11 +110,12 @@
         </section>
 
         <!-- About Me Section -->
+        {% if about_me.img_url_for_about %}
         <section id="about" class="pt-20 pb-12">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center">About Me</h2>
             <div class="max-w-6xl mx-auto px-4">
                 <div class="flex flex-col md:flex-row items-center gap-8">
-                    <!-- Doctor's Photo -->
+
                     <div class="w-full md:w-1/2 flex justify-center">
                         <div class="bg-blue-100 rounded-full overflow-hidden shadow-lg w-64 h-64">
                             <img src="{{ about_me.img_url_for_about }}"
@@ -128,7 +132,19 @@
                 </div>
             </div>
         </section>
-
+        {% else %}
+        <section id="about" class="min-h-screen flex items-center justify-center py-20">
+            <div class="max-w-4xl mx-auto px-4 text-center">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-12">About Me</h2>
+                <div class="space-y-8">
+                    <h3 class="text-3xl font-semibold text-gray-700">{{ about_me.title|default:"Dr. Aatmbhav Sharma"}}</h3>
+                    <p class="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+                        {{ about_me.content|default:"With over 15 years of experience in holistic medicine, Dr. Sharma specializes in integrating traditional and modern approaches to wellness. His unique methodology combines yoga therapy, nutritional counseling, and personalized treatment plans." }}
+                    </p>
+                </div>
+            </div>
+        </section>
+        {% endif %}
         <section id="services" class="py-12 bg-[#87C0CD] rounded-xl">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center">Our Services</h2>
 
@@ -282,10 +298,7 @@
     <footer class="bg-[#113F67] text-[#F3F9FB] py-8">
         <div class="container mx-auto px-4">
             <div class="grid md:grid-cols-3 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4">Aatmbhav</h3>
-                    <p class="text-[#F3F9FB]">Providing holistic wellness solutions through yoga, nutrition, and personalized consultations.</p>
-                </div>
+
                 <div>
                     <h3 class="text-xl font-bold mb-4">Quick Links</h3>
                     <ul class="space-y-2">
@@ -298,11 +311,37 @@
                 </div>
                 <div>
                     <h3 class="text-xl font-bold mb-4">Contact Info</h3>
-                    <ul class="space-y-2 text-[#F7F6E7]">
-                        <li class="flex items-center"><i class="fas fa-map-marker-alt mr-2"></i> 123 Wellness St, City</li>
-                        <li class="flex items-center"><i class="fas fa-phone mr-2"></i> +1 234 567 890</li>
-                        <li class="flex items-center"><i class="fas fa-envelope mr-2"></i> info@aatmbhav.com</li>
-                    </ul>
+                        <ul class="space-y-2 text-[#F7F6E7]">
+                            <li class="flex items-center">
+                                <a href="#">
+                                    <i class="fas fa-map-marker-alt mr-2"></i>
+                                    {{ contact.address|default:"Junagadh, Gujarat, India" }}
+                                </a>
+                            </li>
+
+                            {% if contact.phone %}
+                            <li class="flex items-center">
+                                <a href="tel:{{ contact.phone }}">
+                                    <i class="fas fa-phone mr-2"></i>
+                                    {{ contact.phone_title|default:"Book an appointment" }}
+                                </a>
+                            </li>
+                            {% else %}
+                            <li class="flex items-center">
+                                <a href="https://wa.me/{{ contact.whatsapp|urlencode }}?text=Hello%20I%20want%20to%20know%20more%20about%20your%20services">
+                                    <i class="fas fa-phone mr-2"></i>
+                                    {{ contact.whatsapp_title|default:"Book an appointment" }}
+                                </a>
+                            </li>
+                            {% endif %}
+
+                            <li class="flex items-center">
+                                <a href="mailto:{{ contact.email }}">
+                                    <i class="fas fa-envelope mr-2"></i>
+                                    {{ contact.email_title|default:"Mail us" }}
+                                </a>
+                            </li>
+                        </ul>
                     <div class="flex space-x-4 mt-4">
                         <a href="{{ links.facebook }}" class="text-[#F7F6E7] hover:text-[#C1C0B9] transition-colors"><i class="fab fa-facebook-f"></i></a>
                         <a href="{{ links.twitter }}" class="text-[#F7F6E7] hover:text-[#C1C0B9] transition-colors"><i class="fab fa-twitter"></i></a>
@@ -313,6 +352,7 @@
             </div>
             <div class="border-t border-[#87C0CD] mt-8 pt-6 text-center text-[#F3F9FB]">
                 <p>&copy; 2025 Aatmbhav. All rights reserved.</p>
+                <p class="text-sm mt-2">Made with ❤️ by Jethva Bhavansi</p>
             </div>
         </div>
     </footer>
