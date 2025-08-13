@@ -1,6 +1,22 @@
 from django.db import models
 from django.utils.text import slugify
 
+class HeroSection(models.Model):
+    title = models.CharField(max_length=20, blank=True, null=True)
+    hero_image_url = models.URLField(blank=True, null=True)
+    website = models.URLField("Optional Field", blank=True, null=True)
+    brand_name = models.CharField(max_length=20, blank=True, null=True)
+    brand_logo = models.URLField()
+    hero_name = models.CharField(max_length=10, blank=True, null=True)
+    hero_name_description = models.CharField(max_length=20, blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Hero Section"
+        verbose_name_plural = "Main Page Landing Section"
+
+    def __str__(self):
+        return self.title
+
 class AboutMe(models.Model):
     title = models.CharField(max_length=100)
     img_url_for_about = models.URLField(blank=True, null=True)

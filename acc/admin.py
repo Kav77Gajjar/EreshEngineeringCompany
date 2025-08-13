@@ -8,6 +8,7 @@ admin.site.site_header = "Aatmabhav's Admin"
 admin.site.site_title = "Aatmabhav's Admin Portal"
 admin.site.index_title = "Welcome to Aatmabhav's Admin Dashboard"
 
+admin.site.register(HeroSection)
 admin.site.register(AboutMe)
 admin.site.register(SocialLinks)
 admin.site.register(Services)

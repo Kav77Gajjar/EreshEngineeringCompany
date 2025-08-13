@@ -4,18 +4,22 @@ from django.http import HttpResponse
 from django_ratelimit.decorators import ratelimit
 from disposable_email_domains import blocklist
 from django.core.exceptions import ValidationError
-from .models import Blog, AboutMe, SocialLinks, Services
+from .models import Blog, AboutMe, SocialLinks, Services, HeroSection
 
 
 # common context for all views
 def common_context():
     return {
+        'hero' : HeroSection.objects.first(),
         'about_me' : AboutMe.objects.first(),
         'posts' : Blog.objects.all().order_by("-created_at"),
         'service' : Services.objects.all(),
         'links' : SocialLinks.objects.all()
     }
 # admin service
+def hero_view(request):
+    return render(request, 'Aatmbhav.html', context=common_context())
+
 def about_me_view(request):
     return render(request, "Aatmbhav.html", common_context())
 
