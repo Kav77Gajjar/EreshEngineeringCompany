@@ -365,6 +365,26 @@
     </footer>
 
     <script>
+        // Welcome section parallax effect
+        const welcomeSection = document.querySelector('section[style*="background-image"]');
+        const welcomeContent = document.getElementById('welcome-content');
+
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.pageYOffset;
+            const sectionHeight = welcomeSection.offsetHeight;
+
+            // Parallax background effect
+            const backgroundPosition = scrollPosition * 0.5;
+            welcomeSection.style.backgroundPositionY = `calc(50% + ${backgroundPosition}px)`;
+
+            // Content fade and slight move effect
+            const contentOpacity = 1 - (scrollPosition / sectionHeight * 1.5);
+            const contentTranslateY = scrollPosition * 0.3;
+
+            welcomeContent.style.opacity = Math.max(0, contentOpacity);
+            welcomeContent.style.transform = `translateY(${contentTranslateY}px)`;
+        });
+
         // Scroll handling for header
         let lastScroll = 0;
         const header = document.querySelector('header');
