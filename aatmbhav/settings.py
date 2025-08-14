@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = "testsecretkey"
 
 DEBUG = True
 ALLOWED_HOSTS = []

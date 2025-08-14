@@ -6,42 +6,96 @@
     <title>{{ service.title }} - Aatmbhav</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        html {
-  scroll-behavior: smooth;
-}
-        /* Custom styles for hover effects */
-        .nav-link {
-            position: relative;
-            transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 9999px;
-        }
-        .nav-link:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white !important;
-            transform: scale(1.05);
-        }
-
-        header {
-            transition: transform 0.3s ease-in-out;
-            background-color: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .nav-link {
-            position: relative;
-            transition: color 0.3s ease;
-            padding: 0.5rem 1rem;
-        }
-        .nav-link:hover {
-            color: #87C0CD !important;
-        }
-        header.hide {
-            transform: translateY(-100%);
-        }
-    </style>
+        <style>
+            :root {
+                --header-footer-bg: #1A2C40;
+                --header-footer-text: #FFFFFF;
+                --hover-yellow: #F5B301;
+                --section-bg-light: #F9FAFB;
+                --section-bg-white: #FFFFFF;
+                --card-bg: #FFFFFF;
+                --card-title: #1A2C40;
+                --card-description: #4B5563;
+                --btn-primary-bg: #F5B301;
+                --btn-primary-text: #1A2C40;
+                --btn-hover-bg: #C1440E;
+                --btn-hover-text: #FFFFFF;
+            }
+            html {
+                scroll-behavior: smooth;
+            }
+            body {
+                background: var(--section-bg-light);
+                color: var(--card-title);
+            }
+            .nav-link {
+                position: relative;
+                transition: all 0.3s ease;
+                padding: 0.5rem 1rem;
+                border-radius: 9999px;
+                color: var(--header-footer-text);
+            }
+            .nav-link:hover {
+                color: var(--hover-yellow) !important;
+                transform: scale(1.05);
+            }
+            header {
+                transition: transform 0.3s ease-in-out;
+                background-color: var(--header-footer-bg) !important;
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+            }
+            header.hide {
+                transform: translateY(-100%);
+            }
+            .btn-primary {
+                background-color: var(--btn-primary-bg);
+                color: var(--btn-primary-text);
+                font-weight: bold;
+                transition: all 0.3s ease;
+            }
+            .btn-primary:hover {
+                background-color: var(--btn-hover-bg);
+                color: var(--btn-hover-text);
+            }
+            .card-bg {
+                background-color: var(--card-bg);
+            }
+            .card-title {
+                color: var(--card-title);
+            }
+            .card-description {
+                color: var(--card-description);
+            }
+            .footer-bg {
+                background-color: var(--header-footer-bg);
+                color: var(--header-footer-text);
+            }
+            .footer-link:hover {
+                color: var(--hover-yellow);
+            }
+        </style>
+                color: var(--accent2);
+            }
+            .bg-primary {
+                background-color: var(--primary) !important;
+            }
+            .bg-secondary {
+                background-color: var(--secondary) !important;
+            }
+            .bg-accent1 {
+                background-color: var(--accent1) !important;
+            }
+            .bg-accent2 {
+                background-color: var(--accent2) !important;
+            }
+            .text-primary {
+                color: var(--text-primary) !important;
+            }
+            .text-secondary {
+                color: var(--text-secondary) !important;
+            }
+        </style>
 </head>
 <body class="font-sans bg-gray-50">
     <!-- Header Section -->

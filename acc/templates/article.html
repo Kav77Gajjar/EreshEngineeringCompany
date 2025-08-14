@@ -7,39 +7,72 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --header-footer-bg: #1A2C40;
+            --header-footer-text: #FFFFFF;
+            --hover-yellow: #F5B301;
+            --section-bg-light: #F9FAFB;
+            --section-bg-white: #FFFFFF;
+            --card-bg: #FFFFFF;
+            --card-title: #1A2C40;
+            --card-description: #4B5563;
+            --btn-primary-bg: #F5B301;
+            --btn-primary-text: #1A2C40;
+            --btn-hover-bg: #C1440E;
+            --btn-hover-text: #FFFFFF;
+        }
         html {
-  scroll-behavior: smooth;
-}
-        /* Custom styles for hover effects */
+            scroll-behavior: smooth;
+        }
+        body {
+            background: var(--section-bg-light);
+            color: var(--card-title);
+        }
         .nav-link {
             position: relative;
             transition: all 0.3s ease;
             padding: 0.5rem 1rem;
             border-radius: 9999px;
+            color: var(--header-footer-text);
         }
         .nav-link:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white !important;
+            color: var(--hover-yellow) !important;
             transform: scale(1.05);
         }
-
         header {
             transition: transform 0.3s ease-in-out;
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: var(--header-footer-bg) !important;
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .nav-link {
-            position: relative;
-            transition: color 0.3s ease;
-            padding: 0.5rem 1rem;
-        }
-        .nav-link:hover {
-            color: #87C0CD !important;
         }
         header.hide {
             transform: translateY(-100%);
+        }
+        .btn-primary {
+            background-color: var(--btn-primary-bg);
+            color: var(--btn-primary-text);
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: var(--btn-hover-bg);
+            color: var(--btn-hover-text);
+        }
+        .card-bg {
+            background-color: var(--card-bg);
+        }
+        .card-title {
+            color: var(--card-title);
+        }
+        .card-description {
+            color: var(--card-description);
+        }
+        .footer-bg {
+            background-color: var(--header-footer-bg);
+            color: var(--header-footer-text);
+        }
+        .footer-link:hover {
+            color: var(--hover-yellow);
         }
     </style>
 </head>
@@ -54,7 +87,7 @@
 <!--                        <i class="fas fa-rocket text-[#F3F9FB] text-xl"></i>-->
                             <img src="{{ hero.brand_logo }}" alt="Logo" class="w-8 h-8">
 <!--                    </div>-->
-                    <a href="{{ hero.website }}" class="text-2xl font-bold text-[#F3F9FB] hover:text-[#87C0CD] transition-colors">
+                    <a href="{{ hero.website }}" class="text-2xl font-bold text-white hover:text-[#F5B301] transition-colors">
                         {{ hero.brand_name|default:"Aatmbhav" }}
                     </a>
                 </div>
@@ -100,7 +133,7 @@
             </div>
 
             <!-- Article Header -->
-            <article class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <article class="card-bg rounded-lg shadow-lg overflow-hidden">
                 <!-- Featured Image -->
                 {% if blog_detail.image_url %}
                 <div class="w-full h-64 md:h-96 overflow-hidden">
@@ -114,7 +147,7 @@
                 <div class="p-6 md:p-8">
                     <!-- Article Meta -->
                     <div class="mb-4">
-                        <div class="flex items-center text-sm text-gray-500 mb-2">
+                        <div class="flex items-center text-sm card-description mb-2">
                             <i class="far fa-calendar-alt mr-2"></i>
                             <time datetime="{{ blog_detail.created_at|date:'Y-m-d' }}">
                                 {{ blog_detail.created_at|date:"F d, Y" }}
@@ -123,19 +156,19 @@
                     </div>
 
                     <!-- Article Title -->
-                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    <h1 class="text-3xl md:text-4xl font-bold card-title mb-6">
                         {{ blog_detail.title }}
                     </h1>
 
                     <!-- Article Content -->
-                    <div class="blog-content prose max-w-none text-gray-700 text-lg">
+                    <div class="blog-content prose max-w-none card-description text-lg">
                         {{ blog_detail.content|linebreaks }}
                     </div>
 
                     <!-- Article Footer -->
                     <div class="mt-8 pt-6 border-t border-gray-200">
                         <div class="flex items-center justify-between">
-                            <div class="text-sm text-gray-500">
+                            <div class="text-sm card-description">
                                 <i class="far fa-clock mr-1"></i>
                                 Published on {{ blog_detail.created_at|date:"F d, Y" }}
                             </div>
@@ -180,7 +213,7 @@
             <!-- Navigation to Other Posts -->
             <div class="mt-8 flex justify-center">
                 <a href="/#blog"
-                   class="inline-flex items-center px-6 py-3 bg-[#113F67] text-white rounded-lg hover:bg-[#87C0CD] transition-colors">
+                   class="btn-primary inline-flex items-center px-6 py-3 rounded-lg transition-colors">
                     <i class="fas fa-arrow-left mr-2"></i>
                     View More Articles
                 </a>
@@ -189,25 +222,25 @@
     </main>
 
     <!-- Footer Section -->
-    <footer class="bg-[#113F67] text-[#F3F9FB] py-8">
+    <footer class="footer-bg py-8">
         <div class="container mx-auto px-4">
             <div class="grid md:grid-cols-3 gap-8">
 
                 <div>
                     <h3 class="text-xl font-bold mb-4">Quick Links</h3>
                     <ul class="space-y-2">
-                        <li><a href="#home" class="text-[#F3F9FB] hover:text-[#87C0CD] transition-colors">Home</a></li>
-                        <li><a href="#about" class="text-[#F3F9FB] hover:text-[#87C0CD] transition-colors">About</a></li>
-                        <li><a href="#services" class="text-[#F3F9FB] hover:text-[#87C0CD] transition-colors">Services</a></li>
-                        <li><a href="#blog" class="text-[#F3F9FB] hover:text-[#87C0CD] transition-colors">Blog</a></li>
-                        <li><a href="#contact" class="text-[#F3F9FB] hover:text-[#87C0CD] transition-colors">Contact</a></li>
+                        <li><a href="#home" class="footer-link transition-colors">Home</a></li>
+                        <li><a href="#about" class="footer-link transition-colors">About</a></li>
+                        <li><a href="#services" class="footer-link transition-colors">Services</a></li>
+                        <li><a href="#blog" class="footer-link transition-colors">Blog</a></li>
+                        <li><a href="#contact" class="footer-link transition-colors">Contact</a></li>
                     </ul>
                 </div>
                 <div>
                     <h3 class="text-xl font-bold mb-4">Contact Info</h3>
-                        <ul class="space-y-2 text-[#F7F6E7]">
+                        <ul class="space-y-2">
                             <li class="flex items-center">
-                                <a href="#">
+                                <a href="#" class="footer-link transition-colors">
                                     <i class="fas fa-map-marker-alt mr-2"></i>
                                     {{ contact.address|default:"Junagadh, Gujarat, India" }}
                                 </a>
@@ -215,14 +248,14 @@
 
                             {% if contact.phone %}
                             <li class="flex items-center">
-                                <a href="tel:{{ contact.phone }}">
+                                <a href="tel:{{ contact.phone }}" class="footer-link transition-colors">
                                     <i class="fas fa-phone mr-2"></i>
                                     {{ contact.phone_title|default:"Book an appointment" }}
                                 </a>
                             </li>
                             {% else %}
                             <li class="flex items-center">
-                                <a href="https://wa.me/{{ contact.whatsapp|urlencode }}?text=Hello%20I%20want%20to%20know%20more%20about%20your%20services">
+                                <a href="https://wa.me/{{ contact.whatsapp|urlencode }}?text=Hello%20I%20want%20to%20know%20more%20about%20your%20services" class="footer-link transition-colors">
                                     <i class="fas fa-phone mr-2"></i>
                                     {{ contact.whatsapp_title|default:"Book an appointment" }}
                                 </a>
@@ -230,21 +263,21 @@
                             {% endif %}
 
                             <li class="flex items-center">
-                                <a href="mailto:{{ contact.email }}">
+                                <a href="mailto:{{ contact.email }}" class="footer-link transition-colors">
                                     <i class="fas fa-envelope mr-2"></i>
                                     {{ contact.email_title|default:"Mail us" }}
                                 </a>
                             </li>
                         </ul>
                     <div class="flex space-x-4 mt-4">
-                        <a href="{{ links.facebook }}" class="text-[#F7F6E7] hover:text-[#C1C0B9] transition-colors"><i class="fab fa-facebook-f"></i></a>
-                        <a href="{{ links.twitter }}" class="text-[#F7F6E7] hover:text-[#C1C0B9] transition-colors"><i class="fab fa-twitter"></i></a>
-                        <a href="{{ links.instagram }}" class="text-[#F7F6E7] hover:text-[#C1C0B9] transition-colors"><i class="fab fa-instagram"></i></a>
-                        <a href="{{ links.linkedin }}" class="text-[#F7F6E7] hover:text-[#C1C0B9] transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="{{ links.facebook }}" class="footer-link transition-colors"><i class="fab fa-facebook-f"></i></a>
+                        <a href="{{ links.twitter }}" class="footer-link transition-colors"><i class="fab fa-twitter"></i></a>
+                        <a href="{{ links.instagram }}" class="footer-link transition-colors"><i class="fab fa-instagram"></i></a>
+                        <a href="{{ links.linkedin }}" class="footer-link transition-colors"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="border-t border-[#87C0CD] mt-8 pt-6 text-center text-[#F3F9FB]">
+            <div class="border-t border-gray-400 mt-8 pt-6 text-center">
                 <p>&copy; 2025 Aatmbhav. All rights reserved.</p>
                 <p class="text-sm mt-2">Made with ❤️ by Jethva Bhavansi</p>
             </div>

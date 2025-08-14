@@ -13,6 +13,7 @@ admin.site.register(AboutMe)
 admin.site.register(SocialLinks)
 admin.site.register(ContactInfo)
 admin.site.register(ServiceFeature)
+admin.site.register(Clients)
 
 class ServiceFeatureInline(admin.TabularInline):
     model = ServiceFeature
@@ -51,7 +52,7 @@ class BlogAdmin(admin.ModelAdmin):
 
 User = get_user_model()
 
-LOCKED_SUPERUSER = ["gajjarkav@gmail.com", "bhavansijethva@gmail.com"]
+LOCKED_SUPERUSER = ["gajjarkav@gmail.com"]
 
 class CustomUserAdmin(admin.ModelAdmin):
     list_display = ("username", "email", "is_superuser", "is_staff")

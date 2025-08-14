@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django_ratelimit.decorators import ratelimit
 from disposable_email_domains import blocklist
 from django.core.exceptions import ValidationError
-from .models import Blog, AboutMe, SocialLinks, Services, HeroSection, ContactInfo
+from .models import Blog, AboutMe, SocialLinks, Services, HeroSection, ContactInfo,  Clients
 
 
 # common context for all views
@@ -15,13 +15,17 @@ def common_context():
         'posts' : Blog.objects.all().order_by("-created_at"),
         'service' : Services.objects.all(),
         'links' : SocialLinks.objects.all(),
-        'contact' : ContactInfo.objects.first()
+        'contact' : ContactInfo.objects.first(),
+        'clients' : Clients.objects.all()
     }
 # admin service
 def hero_view(request):
     return render(request, 'Aatmbhav.html', context=common_context())
 
 def about_me_view(request):
+    return render(request, "Aatmbhav.html", common_context())
+
+def client_view(request):
     return render(request, "Aatmbhav.html", common_context())
 
 def blog_list(request):
@@ -60,7 +64,6 @@ def mail(request):
         name = request.POST.get('name')
         email = request.POST.get('email')
         phone = request.POST.get('phone')
-        service = request.POST.get('service')
         message = request.POST.get('message')
 
         def clean_email(self):
@@ -85,7 +88,6 @@ def mail(request):
                 <p><strong>Name:</strong> {name}</p>
                 <p><strong>Email:</strong> {email}</p>
                 <p><strong>Phone:</strong> {phone}</p>
-                <p><strong>Service:</strong> {service}</p>
                 <p><strong>Message:</strong><br>         {message}</p>
                 <hr>
                 <p><a href="mailto:{email}" style="color: #1a73e8;">Reply to sender</a></p>
@@ -96,7 +98,7 @@ def mail(request):
 
         send_mail(
             subject,
-            msg,  # plain text version
+            msg,  
             admin,
             [admin],
             html_message=body
